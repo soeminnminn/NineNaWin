@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_setdate"
+        android:orderInCategory="100"
+        android:icon="@drawable/menuiconappt"
+        android:title="@string/action_set_date"/>
+    
+    <item
+        android:id="@+id/action_setlevel"
+        android:orderInCategory="100"
+        android:icon="@drawable/menuicontask"
+        android:title="@string/action_set_level"/>
+    
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:icon="@drawable/menuiconprefs"
+        android:title="@string/action_settings"/>
+
+</menu>

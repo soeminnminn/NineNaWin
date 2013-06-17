@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2010 Johan Nilsson <http://markupartist.com>
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <color name="actionbar_separator">#8B1A1A</color>
+    <color name="actionbar_title">#FFFFFF</color>
+    <color name="actionbar_background_start">#505050</color>
+    <color name="actionbar_background_end">#242424</color>
+    <color name="actionbar_background_item_pressed_start">#FF7F00</color>
+    <color name="actionbar_background_item_pressed_end">#EE7600</color>
+    
+    <color name="grey_90">#E5E5E5</color>
+    <color name="grey_80">#cccccc</color>
+    <color name="grey_75">#BFBFBF</color>
+    <color name="grey_70">#B2B2B2</color>
+    <color name="grey_60">#999999</color>
+    <color name="grey_50">#808080</color>
+    <color name="grey_45">#727272</color>
+    <color name="grey_40">#666666</color>
+    <color name="grey_30">#4C4C4C</color>
+    <color name="grey_25">#3F3F3F</color>
+    <color name="grey_20">#333333</color>
+    <color name="grey_15">#262626</color>
+    <color name="grey_10">#1a1a1a</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_50_opacity">#80000000</color>
+    <color name="white_50_opacity">#80FFFFFF</color>
+    <color name="white_33_opacity">#54FFFFFF</color>
+    <color name="white_20_opacity">#33FFFFFF</color>
+    
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <color name="bright_accent">@color/holo_blue_light</color>
+    
+    <color name="background_default">@color/grey_20</color>
+    <color name="background_highlight">@color/grey_30</color>
+    <color name="background_holo_dark">#ff000000</color>
+    <color name="background_holo_light">#fff3f3f3</color>
+    
+    <color name="bright_foreground_holo_dark">@color/background_holo_light</color>
+    <color name="bright_foreground_holo_light">@color/background_holo_dark</color>
+    <color name="bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
+    <color name="bright_foreground_disabled_holo_light">#ffb2b2b2</color>
+    <color name="bright_foreground_inverse_holo_dark">@color/bright_foreground_holo_light</color>
+    <color name="bright_foreground_inverse_holo_light">@color/bright_foreground_holo_dark</color>
+    
+    <color name="dim_foreground_holo_dark">#bebebe</color>
+    <color name="dim_foreground_disabled_holo_dark">#80bebebe</color>
+    <color name="dim_foreground_inverse_holo_dark">#323232</color>
+    <color name="dim_foreground_inverse_disabled_holo_dark">#80323232</color>
+    <color name="hint_foreground_holo_dark">#808080</color>
+    <color name="dim_foreground_holo_light">#323232</color>
+    <color name="dim_foreground_disabled_holo_light">#80323232</color>
+    <color name="dim_foreground_inverse_holo_light">#bebebe</color>
+    <color name="dim_foreground_inverse_disabled_holo_light">#80bebebe</color>
+    
+    <color name="hint_foreground_holo_light">#808080</color>
+    <color name="highlighted_text_holo_dark">#6633b5e5</color>
+    <color name="highlighted_text_holo_light">#6633b5e5</color>
+    <color name="link_text_holo_dark">#5c5cff</color>
+    <color name="link_text_holo_light">#0000ee</color>
+    
+    <color name="textColorPrimary">@color/grey_90</color>
+    <color name="textColorHighlight">@color/white</color>
+    <color name="textColorHint">@color/grey_60</color>
+    <color name="textColorLink">@color/bright_accent</color>
+    
+    <color name="color_red">#993333</color>
+    <color name="color_brown">#330000</color>
+    <color name="color_green">#61A161</color>
+    <color name="color_yellow">#CCCC33</color>
+    <color name="color_pink">#DB70DB</color>
+    <color name="color_widget_background">#61A161</color>
+</resources>
