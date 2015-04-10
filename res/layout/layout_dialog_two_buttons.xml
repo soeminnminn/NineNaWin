@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutDialogTwoButtons"
+    style="@style/ButtonBar"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="2" >    
+    
+    <Button
+        android:id="@android:id/button2"
+        style="@style/ButtonBar.Button"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@android:string/cancel" />
+    
+	<View 
+	    android:layout_width="1dip"
+        android:layout_height="match_parent"
+        android:background="@drawable/divider_horizontal_holo_light"
+        android:layout_marginTop="6dip"
+        android:layout_marginBottom="6dip" />
+    
+    <Button
+        android:id="@android:id/button1"
+        style="@style/ButtonBar.Button"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@android:string/ok" />
+    
+</LinearLayout>

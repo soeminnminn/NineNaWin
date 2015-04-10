@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <dimen name="dialog_buttonbar_vertical_padding">2dp</dimen>
+    <dimen name="dialog_buttonbar_horizontal_padding">8dp</dimen>
+    <dimen name="dialog_horizontal_margin">16dp</dimen>
+    <dimen name="dialog_vertical_margin">8dp</dimen>
+    <dimen name="dialog_button_bar_height">48dip</dimen>
+    <dimen name="dialog_button_bar_divider_padding">1dip</dimen>
+    
+    <style name="ButtonBar">
+        <item name="android:background">@drawable/buttonbar_background_light</item>
+        <item name="android:divider">@drawable/divider_horizontal_holo_dark</item>
+        <item name="android:paddingBottom">0dip</item>
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:paddingRight">0dip</item>
+        <item name="android:paddingTop">1dip</item>
+        <item name="android:layout_height">@dimen/dialog_button_bar_height</item>
+    </style>
+    <style name="ButtonBar.Button" parent="@android:style/Widget.Holo.Button.Borderless">
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:textColor">@color/bright_foreground_holo_light</item>
+	    <item name="android:textStyle">normal</item>
+	    <item name="android:minWidth">56dip</item>
+	    <item name="android:gravity">center</item>
+	</style>
+	<style name="ButtonBar.Material">
+	    <item name="android:background">@drawable/transparent</item>
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">@dimen/dialog_button_bar_height</item>
+	    <item name="android:paddingTop">@dimen/dialog_buttonbar_vertical_padding</item>
+	    <item name="android:paddingLeft">@dimen/dialog_buttonbar_horizontal_padding</item>
+	    <item name="android:paddingRight">@dimen/dialog_buttonbar_horizontal_padding</item>
+	</style>
+	<style name="ButtonBar.Button.Material" parent="@android:style/Widget.Button">
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+	    <item name="android:background">@drawable/material_dialog_button</item>
+	    <item name="android:textColor">@color/material_button_text</item>
+	    <item name="android:textStyle">normal</item>
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:gravity">center</item>
+	    <item name="android:minWidth">56dip</item>
+	</style>
+	<style name="ButtonBar.Button.Material.NoMargin" parent="@android:style/Widget.Button">
+	    <item name="android:background">@drawable/material_dialog_button</item>
+	    <item name="android:textColor">@color/material_button_text</item>
+	    <item name="android:textStyle">normal</item>
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:gravity">center</item>
+	    <item name="android:minWidth">56dip</item>
+	</style>
+	<style name="ButtonBar.Button.Material.Active" parent="@style/ButtonBar.Button.Material">
+	    <item name="android:textColor">@color/material_active_button_text</item>
+	    <item name="android:minWidth">56dip</item>
+	</style>
+	
+	<style name="DialogLayout">
+    </style>
+    <style name="DialogLayout.Material">
+        <item name="android:background">@drawable/material_card_nos</item>
+    	<item name="android:paddingTop">@dimen/dialog_vertical_margin</item>
+    	<item name="android:paddingBottom">@dimen/dialog_vertical_margin</item>
+    </style>
+    <style name="DialogLayout.Title" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/holo_blue_light</item>
+    </style>
+    
+    <style name="DialogTitleLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/action_bar_default_height</item>
+        <item name="android:paddingLeft">@dimen/dialog_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/dialog_horizontal_margin</item>
+        <item name="android:background">@drawable/dialog_top_background_holo_light</item>
+    </style>
+    <style name="DialogTitleLayout.Material" parent="@style/DialogTitleLayout">
+    </style>
+	
+    <style name="Dialog" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
+    </style>
+    <style name="Dialog.NoTitle" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

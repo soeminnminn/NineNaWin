@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2010 Johan Nilsson <http://markupartist.com>
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-  
-          http://www.apache.org/licenses/LICENSE-2.0
-  
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources>
-    <color name="actionbar_separator">#8B1A1A</color>
+    <color name="app_background">#ffffffff</color>
+    
+    <color name="app_color_primary">#ffb18427</color>
+    <color name="app_color_primary_dark">#ff966f21</color>
+    <color name="app_color_accent">#ffe3a832</color>
+	
+	<color name="appbar_background">#ccb18427</color>
+	<color name="appbar_player_background">#ffb18427</color>
+	
+	<color name="detail_subheader_text_color">#ff8080c0</color>
+	
+	<color name="scrubber_track_color">#ffc8de7a</color>
+	<color name="scrubber_primary_color">#ff80ac5d</color>
+	<color name="scrubber_secondary_color">#ff60ab22</color>
+	<color name="seek_thumb_color">#ff80ac5d</color>
+	
+	<color name="ninenawin_red">#993333</color>
+    <color name="ninenawin_brown">#330000</color>
+    <color name="ninenawin_green">#61A161</color>
+    <color name="ninenawin_yellow">#CCCC33</color>
+    <color name="ninenawin_pink">#DB70DB</color>
+    <color name="ninenawin_white">@android:color/white</color>
+    
+    <color name="player_button_normal">#fff683</color>
+    
+    <!-- System Colors -->
+    <color name="actionbar_separator">#808080</color>
     <color name="actionbar_title">#FFFFFF</color>
     <color name="actionbar_background_start">#505050</color>
     <color name="actionbar_background_end">#242424</color>
-    <color name="actionbar_background_item_pressed_start">#FF7F00</color>
-    <color name="actionbar_background_item_pressed_end">#EE7600</color>
     
     <color name="grey_90">#E5E5E5</color>
     <color name="grey_80">#cccccc</color>
@@ -41,23 +51,33 @@
     <color name="white_50_opacity">#80FFFFFF</color>
     <color name="white_33_opacity">#54FFFFFF</color>
     <color name="white_20_opacity">#33FFFFFF</color>
-    
-    <color name="holo_blue_light">#ff33b5e5</color>
-    <color name="holo_blue_dark">#ff0099cc</color>
-    <color name="bright_accent">@color/holo_blue_light</color>
-    
+    <color name="tab_top">@color/bright_accent</color>
+    <color name="tab_bg_check_off">@color/background_default</color>
+    <color name="tab_bg_check_on">@color/background_highlight</color>
+    <color name="textColorPrimary">@color/grey_90</color>
+    <color name="textColorHighlight">@color/white</color>
+    <color name="textColorHint">@color/grey_60</color>
+    <color name="textColorLink">@color/bright_accent</color>
+    <color name="ab_top">@color/grey_40</color>
+    <color name="ab_bottom">@color/grey_20</color>
+    <color name="ab_underline">@color/bright_accent</color>
     <color name="background_default">@color/grey_20</color>
     <color name="background_highlight">@color/grey_30</color>
+    <color name="bright_accent">@color/holo_blue_light</color>
+
+    <!-- FROM ANDROID SDK SOURCE -->
+    <!-- For holo theme -->
+    <drawable name="screen_background_holo_light">#fff3f3f3</drawable>
+    <drawable name="screen_background_holo_dark">#ff000000</drawable>
+
     <color name="background_holo_dark">#ff000000</color>
     <color name="background_holo_light">#fff3f3f3</color>
-    
     <color name="bright_foreground_holo_dark">@color/background_holo_light</color>
     <color name="bright_foreground_holo_light">@color/background_holo_dark</color>
     <color name="bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
     <color name="bright_foreground_disabled_holo_light">#ffb2b2b2</color>
     <color name="bright_foreground_inverse_holo_dark">@color/bright_foreground_holo_light</color>
     <color name="bright_foreground_inverse_holo_light">@color/bright_foreground_holo_dark</color>
-    
     <color name="dim_foreground_holo_dark">#bebebe</color>
     <color name="dim_foreground_disabled_holo_dark">#80bebebe</color>
     <color name="dim_foreground_inverse_holo_dark">#323232</color>
@@ -67,22 +87,79 @@
     <color name="dim_foreground_disabled_holo_light">#80323232</color>
     <color name="dim_foreground_inverse_holo_light">#bebebe</color>
     <color name="dim_foreground_inverse_disabled_holo_light">#80bebebe</color>
-    
     <color name="hint_foreground_holo_light">#808080</color>
     <color name="highlighted_text_holo_dark">#6633b5e5</color>
     <color name="highlighted_text_holo_light">#6633b5e5</color>
     <color name="link_text_holo_dark">#5c5cff</color>
     <color name="link_text_holo_light">#0000ee</color>
+
+    <!-- Group buttons -->
+    <eat-comment />
+
+    <color name="group_button_dialog_pressed_holo_dark">#46c5c1ff</color>
+    <color name="group_button_dialog_focused_holo_dark">#2699cc00</color>
+    <color name="group_button_dialog_pressed_holo_light">#ffffffff</color>
+    <color name="group_button_dialog_focused_holo_light">#4699cc00</color>
+
+    <!-- Highlight colors for the legacy themes -->
+    <eat-comment />
+
+    <color name="legacy_pressed_highlight">#fffeaa0c</color>
+    <color name="legacy_selected_highlight">#fff17a0a</color>
+    <color name="legacy_long_pressed_highlight">#ffffffff</color>
     
-    <color name="textColorPrimary">@color/grey_90</color>
-    <color name="textColorHighlight">@color/white</color>
-    <color name="textColorHint">@color/grey_60</color>
-    <color name="textColorLink">@color/bright_accent</color>
+    <!-- Forward compatibility for Material-style theme colors -->
+	<eat-comment />
+	<color name="legacy_primary_dark">#ff000000</color>
+	<color name="legacy_primary">#ffe6e6e6</color>
+	<color name="legacy_primary_light">#ffffffff</color>
+	<color name="legacy_control_activated">#ff90df25</color>
+	<color name="legacy_control_normal">#99ffffff</color>
+	<color name="legacy_button_pressed">#fffea50b</color>
+	<color name="legacy_button_normal">#f3dbdbdb</color>
+
+    <!-- General purpose colors for Holo-themed elements -->
+    <eat-comment />
+
+    <!-- A light Holo shade of blue -->
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#ff99cc00</color>
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ffff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <!-- A dark Holo shade of green -->
+    <color name="holo_green_dark">#ff669900</color>
+    <!-- A dark Holo shade of red -->
+    <color name="holo_red_dark">#ffcc0000</color>
+    <!-- A Holo shade of purple -->
+    <color name="holo_purple">#ffaa66cc</color>
+    <!-- A light Holo shade of orange -->
+    <color name="holo_orange_light">#ffffbb33</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="holo_blue_bright">#ff00ddff</color>
+
+    <!-- RAINBOW -->
+    <color name="red">#FF0000</color>
+    <color name="orange">#FF7F00</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="indigo">#4B0082</color>
+    <color name="violet">#8F00FF</color>
     
-    <color name="color_red">#993333</color>
-    <color name="color_brown">#330000</color>
-    <color name="color_green">#61A161</color>
-    <color name="color_yellow">#CCCC33</color>
-    <color name="color_pink">#DB70DB</color>
-    <color name="color_widget_background">#61A161</color>
+    <color name="material_pressed_highlight_dark">#1AFFFFFF</color>
+	<color name="material_focused_highlight_dark">#77000000</color>
+	<color name="material_pressed_highlight_light">#10000000</color>
+    <color name="material_focused_highlight_light">#40000000</color>
+    
+    <color name="material_title_text">#DE000000</color>
+    <color name="material_content_text">#8a000000</color>
+    <color name="material_active_button_text">#ff009688</color>
+    <color name="material_button_text">#de000000</color>
+    
+    <color name="material_ripple_color">#585858</color>
 </resources>

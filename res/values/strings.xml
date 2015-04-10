@@ -1,78 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">NineNaWin</string>
+    <string name="app_name">Dhamma Notes</string>
+    <string name="empty_string"></string>
+    
+    <string name="main_title">တရားေတာ္မ်ား</string>
+    <string name="settings_title">Settings</string>
+    
     <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
     <string name="action_set_date">Set Date</string>
-    <string name="action_set_level">Set Level</string>
-    <string name="action_set_done">Set Done</string>
-	<string name="null_string"></string>
-	<string name="actionbar_activity_not_found">Failed to open intent…</string>
-	<string name="about">About</string>
-	
-	<string name="comfirm_title">Information</string>
-	<string name="comfirm_clear_message">Are your sure to reset all data.</string>
-	
-	<string name="app_mm">ကိုးနဝင္း</string>
-	<string name="app_mm_desc">ကိုးနဝင္း မိုးလင္းမွ သိမယ္</string>
-	
-	<string name="not_monday">ယေန႔သည္ တနလၤာေန႔ မဟုတ္ေသာေၾကာင့္ အဓိဌာန္ပုတီး စစိတ္၍မရပါ။</string>
-	<string name="vege_date">သက္သက္လြတ္ စားရမည့္ရက္</string>
-	<string name="vege_date_now">ယေန႔ သက္သက္လြတ္ စားရမည္။</string>
-	<string name="set_done">ယေန႔ အဓိဌာန္ ပုတီးစိတ္ျပီးပါက   Done ကို နွိပ္ေပးပါ။</string>
-	<string name="not_done">ယေန႔ အဓိဌာန္ ပုတီး မစိတ္ရေသးပါ။</string>
-	<string name="if_done">ယေန႔ အဓိဌာန္ ပုတီး စိတ္ျပီးသြားပါျပီ။</string>
-	<string name="done">Done</string>
-	
-	<string name="level_1_mm">ပထမ အဆင့္</string>
-	<string name="level_2_mm">ဒုတိယ အဆင့္</string>
-	<string name="level_3_mm">တတိယ အဆင့္</string>
-	<string name="level_4_mm">စတုတၱ အဆင့္</string>
-	<string name="level_5_mm">ပဥၥမ အဆင့္</string>
-	<string name="level_6_mm">ဆ႒မ အဆင့္</string>
-	<string name="level_7_mm">သတၱမ အဆင့္</string>
-	<string name="level_8_mm">အ႒မ အဆင့္</string>
-	<string name="level_9_mm">နဝမ အဆင့္</string>
-	
-	<string name="day_1_en">Sunday</string>
-	<string name="day_2_en">Monday</string>
-	<string name="day_3_en">Tuesday</string>
-	<string name="day_4_en">Wednesday</string>
-	<string name="day_5_en">Thursday</string>
-	<string name="day_6_en">Friday</string>
-	<string name="day_7_en">Saturday</string>
-	
-	<string name="day_1_mm">တနဂၤေႏြ</string>
-	<string name="day_2_mm">တနလၤာ</string>
-	<string name="day_3_mm">အဂၤါ</string>
-	<string name="day_4_mm">ဗုဒၶဟူး</string>
-	<string name="day_5_mm">ၾကာသပေတး</string>
-	<string name="day_6_mm">ေသာၾကာ</string>
-	<string name="day_7_mm">စေန</string>
-	
-	<string name="value_1_mm">အရဟံ</string>
-	<string name="value_2_mm">သမၼာသမၺဳေဒၶါ</string>
-	<string name="value_3_mm">ဝိဇၨာစရဏ သမၸေႏၷာ</string>
-	<string name="value_4_mm">သုဂေတာ</string>
-	<string name="value_5_mm">ေလာကဝိဒူ</string>
-	<string name="value_6_mm">အႏုတၱေရာ ပုရိသဒမၼသာရထိ</string>
-	<string name="value_7_mm">သတၱာေဒဝ မနုႆာနံ</string>
-	<string name="value_8_mm">ဗုေဒၶါ</string>
-	<string name="value_9_mm">ဘဂဝါ</string>
-	
-	<string name="round_1_mm">(၁) ပတ္</string>
-	<string name="round_2_mm">(၂) ပတ္</string>
-	<string name="round_3_mm">(၃) ပတ္</string>
-	<string name="round_4_mm">(၄) ပတ္</string>
-	<string name="round_5_mm">(၅) ပတ္</string>
-	<string name="round_6_mm">(၆) ပတ္</string>
-	<string name="round_7_mm">(၇) ပတ္</string>
-	<string name="round_8_mm">(၈) ပတ္</string>
-	<string name="round_9_mm">(၉) ပတ္</string>
-	
-	<string name="prefs_category_options">Options</string>
-	<string name="prefs_reset_data">Reset</string>
-	<string name="prefs_reset_data_summary">Reset all saved data.</string>
-	
-	<string name="prefs_version_name">Version</string>
+    <string name="action_set">Set</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_set_round">Set Round</string>
+    
+    <string name="message_download">Please, download audio file.</string>
+    <string name="message_download_complete">Download completed - %s</string>
+    <string name="download_noti_description">Downloading - %s</string>
+    <string name="player_title">Player</string>
+    <string name="player_time_diplay">00:00</string>
+    
+    <string name="count_title">စိတ္ပုတီး</string>
+    <string name="count_diplay_caption">Count</string>
+    <string name="round_diplay_caption">Round</string>
+    <string name="count_diplay">0</string>
+    <string name="round_diplay">0</string>
+    <string name="date_clear_title">Clear All Start Date</string>
+    <string name="message_date_clear">Are you sure to clear all start date?</string>
+    
+    <string name="damma_news_url">http://www.pyephyohan.info/json_files/idhamma/android_news.xml</string>
+    
+    <string name="prefs_group_general">General</string>
+    <string name="prefs_group_notification">Notification</string>
+    <string name="prefs_about">About</string>
+    <string name="prefs_alarm_volume">Alarm Volume</string>
+    <string name="prefs_alarm_volume_summary">Change alarm volume.</string>
+    <string name="prefs_alarm_notification">Alarm</string>
+    <string name="prefs_alarm_notification_summary">Setup alarm and notification.</string>
+    
+    <string name="about_text"><Data>
+<![CDATA["
+      <p><b>Dhamma Droid</b></p>
+      <p>Develop by <a href='http://www.facebook.com/soeminnminn'>Soe Minn Minn</a></p>
+      <p>Copyright \u00A9 2015 The Android Open Source Project</p>
+      "]]>
+</Data></string>
+
 </resources>

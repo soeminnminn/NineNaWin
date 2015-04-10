@@ -1,61 +1,17 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:gravity="right"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/app_background"
     tools:context=".MainActivity" >
 
     <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="top"
-        android:background="@drawable/actionbar_background"
-        android:paddingLeft="@dimen/actionbar_horizontal_margin"
-        android:paddingRight="@dimen/actionbar_horizontal_margin" >
-
-	    <TextView
-	        android:id="@+id/textViewHeader"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_vertical|center"
-	        android:text="@string/app_name"
-	        android:textAppearance="?android:attr/textAppearanceMedium"
-	        android:textColor="@color/actionbar_title" />
-
-	    <ImageButton
-	        android:id="@+id/imageButtonLeft"
-	        style="@style/HoloActionbarButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:contentDescription="@string/null_string"
-	        android:src="@drawable/arrow_left" />
-
-	    <ImageButton
-	        android:id="@+id/imageButtonRight"
-	        style="@style/HoloActionbarButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="right"
-	        android:contentDescription="@string/null_string"
-	        android:src="@drawable/arrow_right" />
-
-    </FrameLayout>
-
-    <LinearLayout
+        android:id="@+id/mainContainer" 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" >
+    	android:layout_height="match_parent" />
 
-        <ListView
-            android:id="@+id/listViewMain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

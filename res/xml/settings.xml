@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/action_settings">
+    
+    <PreferenceCategory
+        android:title="@string/prefs_group_general">
+        
+        <Preference
+            android:key="prefs_about"
+            android:title="@string/prefs_about" />
+        
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/prefs_group_notification">
+        
+        <VolumePreference
+            android:key="volume_setting"
+            android:title="@string/prefs_alarm_volume"
+            android:summary="@string/prefs_alarm_volume_summary" 
+            android:dialogTitle="@string/prefs_alarm_volume"
+            android:streamType="alarm" />
+        
+        <com.s16.dhammadroid.preference.AlarmPreference
+            android:key="alarm_setting"
+            android:title="@string/prefs_alarm_notification"
+            android:summary="@string/prefs_alarm_notification_summary" />
+        
+    </PreferenceCategory>
+    
+</PreferenceScreen>

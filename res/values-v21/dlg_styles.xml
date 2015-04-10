@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <dimen name="dialog_button_bar_height">58dip</dimen>
+    
+    <style name="ButtonBar.Material" parent="@style/ButtonBar">
+        <item name="android:background">@drawable/transparent</item>
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">@dimen/dialog_button_bar_height</item>
+	    <item name="android:paddingRight">@dimen/dialog_buttonbar_horizontal_padding</item>
+	    <item name="android:paddingBottom">@dimen/dialog_vertical_margin</item>
+    </style>
+    <style name="ButtonBar.Button.Material" parent="@android:style/Widget.Material.Button.Borderless">
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:minWidth">56dip</item>
+        <item name="android:textColor">@color/material_button_text</item>
+	</style>
+    <style name="ButtonBar.Button.Material.Active" parent="@android:style/Widget.Material.Button.Borderless">
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:minWidth">56dip</item>
+        <item name="android:textColor">@color/material_active_button_text</item>
+	</style>
+	
+    <style name="DialogLayout.Title" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    
+    <style name="DialogTitleLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/action_bar_default_height</item>
+        <item name="android:layout_marginLeft">@dimen/dialog_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/dialog_horizontal_margin</item>
+    </style>
+	
+    <style name="Dialog" parent="@android:style/Theme.Material.Light.Dialog.MinWidth">
+        <item name="android:buttonStyleToggle">@android:style/Widget.Material.Light.Button.Toggle</item>
+        <item name="android:imageButtonStyle">@android:style/Widget.Material.Light.ImageButton</item>
+        <item name="android:buttonStyle">@android:style/Widget.Material.Light.Button</item>
+        <item name="android:checkboxStyle">@android:style/Widget.Material.Light.CompoundButton.CheckBox</item>
+        <item name="android:radioButtonStyle">@android:style/Widget.Material.Light.CompoundButton.RadioButton</item>
+    </style>
+    <style name="Dialog.NoTitle" parent="@android:style/Theme.Material.Light.Dialog.NoActionBar.MinWidth">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        
+        <item name="android:buttonStyleToggle">@android:style/Widget.Material.Light.Button.Toggle</item>
+        <item name="android:imageButtonStyle">@android:style/Widget.Material.Light.ImageButton</item>
+        <item name="android:buttonStyle">@android:style/Widget.Material.Light.Button</item>
+        <item name="android:checkboxStyle">@android:style/Widget.Material.Light.CompoundButton.CheckBox</item>
+        <item name="android:radioButtonStyle">@android:style/Widget.Material.Light.CompoundButton.RadioButton</item>
+    </style>
+</resources>

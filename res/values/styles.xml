@@ -1,95 +1,30 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Black">
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+    
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/actionbar_background</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
-    <!-- Button -->
-    <style name="HoloButton">
-	    <item name="android:padding">6dp</item>
-	    <item name="android:background">@drawable/holo_button</item>
-	    <item name="android:textColor">@color/textColorHighlight</item>
-	    <item name="android:gravity">center</item>
-	    <item name="android:textStyle">bold</item>
-	    <item name="android:layout_marginTop">4dp</item>
-        <item name="android:layout_marginBottom">4dp</item>
-	    <item name="android:layout_marginRight">2dp</item>
-        <item name="android:layout_marginLeft">2dp</item>
-	</style>
-	
-    <!-- Actionbar -->
-    <style name="HoloActionBar">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">@dimen/actionbar_height</item>
-        <item name="android:textColor">@color/textColorLink</item>
-        <item name="android:background">@drawable/holo_action_background</item>
-        <item name="android:paddingLeft">@dimen/actionbar_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/actionbar_horizontal_margin</item>
+    
+    <style name="ActionButton" parent="@android:style/Widget.Holo.ActionButton">
+        <item name="android:layout_width">@dimen/action_bar_default_height</item>
+	    <item name="android:layout_height">@dimen/action_bar_default_height</item>
     </style>
-    
-    <style name="HoloActionbarButton">
-	    <item name="android:padding">6dp</item>
-	    <item name="android:background">@drawable/holo_actionbar_button</item>
-	    <item name="android:textColor">#ffffff</item>
-	    <item name="android:gravity">center</item>
-	    <item name="android:textStyle">bold</item>
-	    <item name="android:minHeight">@dimen/actionbar_item_height</item>
-        <item name="android:minWidth">@dimen/actionbar_item_width</item>
-	</style>
-    
-    <!-- Dialog -->
-    <style name="HoloDialog">
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:layout_marginLeft">16dp</item>
-		<!-- <item name="android:padding">8dp</item>
-        <item name="android:background">@drawable/dialog_full_holo_dark</item> -->
-        <item name="android:background">@drawable/holo_popup_background</item>
-		<item name="android:textColor">@color/textColorHighlight</item>
-	</style>
-    
-    <style name="HoloDialogContent">
-		<item name="android:padding">1dp</item>
-		<item name="android:background">@drawable/holo_background_light</item>
-		<item name="android:textColor">@color/textColorHighlight</item>
-	</style>
-	
-    <style name="HoloDialogButtonContainer">
-        <item name="android:background">@drawable/holo_gray50</item>
-	</style>
-    
-    <style name="HoloDialogButton">
-        <item name="android:layout_marginTop">1dp</item>
-        <item name="android:padding">6dp</item>
-        <item name="android:background">@drawable/holo_dialog_button</item>
-		<item name="android:textColor">@color/textColorHighlight</item>
-	    <item name="android:gravity">center</item>
-	    <item name="android:textStyle">bold</item>
-	</style>
-	
-    <!-- Menu -->
-    <style name="HoloMenuContainer">
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:layout_marginRight">8dp</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:background">@drawable/holo_popup_background</item>
-	</style>
-	
-    
-	
+
 </resources>

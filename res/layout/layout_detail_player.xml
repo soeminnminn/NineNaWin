@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/static_bottombar_height"
+    android:background="@drawable/bar_background" >
+    
+    <SeekBar
+        android:id="@+id/seekBarPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/player_seek_horizontal_margin"
+        android:layout_marginRight="@dimen/player_seek_horizontal_margin"
+        android:max="100"
+        android:progress="0" />
+    
+    <TextView
+       android:id="@+id/textViewPlayerStart"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:gravity="center_horizontal"
+       android:layout_marginLeft="@dimen/player_time_horizontal_margin"
+       android:layout_marginStart="@dimen/player_time_horizontal_margin"
+       android:layout_marginTop="@dimen/player_time_vertical_margin"
+       android:text="@string/player_time_diplay"
+       android:textAppearance="?android:attr/textAppearanceSmall"
+       android:textColor="@android:color/white" />
+      
+    <TextView
+       android:id="@+id/textViewPlayerEnd"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="right|end"
+       android:layout_marginRight="@dimen/player_time_horizontal_margin"
+       android:layout_marginEnd="@dimen/player_time_horizontal_margin"
+       android:layout_marginTop="@dimen/player_time_vertical_margin"
+       android:gravity="center_horizontal"
+       android:text="@string/player_time_diplay"
+       android:textAppearance="?android:attr/textAppearanceSmall"
+       android:textColor="@android:color/white" />
+      
+    <TextView
+       android:id="@+id/textViewPlayerMessage"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center_horizontal"
+       android:layout_marginTop="@dimen/player_message_vertical_margin"
+       android:text="@string/message_download"
+       android:textAppearance="?android:attr/textAppearanceMedium"
+       android:textColor="@android:color/white" />
+    
+    <ImageButton
+       android:id="@+id/imageButtonPlayer"
+       android:layout_width="@dimen/player_button_size"
+       android:layout_height="@dimen/player_button_size"
+       android:layout_gravity="center"
+       android:layout_marginTop="@dimen/player_button_vertical_margin"
+       android:background="@drawable/player_button_background"
+       android:contentDescription="@string/empty_string"
+       android:src="@drawable/ic_play" />
+
+</FrameLayout>

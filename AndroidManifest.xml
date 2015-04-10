@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.s16.ninenawin"
+    package="com.s16.dhammadroid"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0.0.20150331" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="10" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,32 +20,47 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
-            android:name="SettingsActivity">
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/app_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.s16.dhammadroid.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.s16.dhammadroid.CounterActivity"
+            android:label="@string/app_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.s16.dhammadroid.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.s16.dhammadroid.SettingsActivity"
+            android:label="@string/settings_title" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.s16.dhammadroid.MainActivity" />
         </activity>
         
-        <service android:name="NotificationService" />
+        <activity
+            android:name=".test.DownloadDataActivity"
+            android:label="@string/app_name" >
+        </activity>
         
-        <receiver 
-            android:label="@string/app_name" 
-            android:description="@string/app_mm_desc" 
-            android:name="ItemWidgetProvider">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-				<action android:name="android.intent.action.DATE_CHANGED"/>
-            </intent-filter>
+        <activity
+            android:name=".test.ZoomTestActivity"
+            android:label="@string/app_name" >
             
-            <meta-data
-          		android:name="android.appwidget.provider"
-          		android:resource="@xml/item_widget" />
-        </receiver>
+        </activity>
+        
     </application>
 
 </manifest>
