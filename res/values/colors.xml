@@ -9,6 +9,7 @@
 	<color name="appbar_background">#ccb18427</color>
 	<color name="appbar_player_background">#ffb18427</color>
 	
+	<color name="detail_text_color">@color/black</color>
 	<color name="detail_subheader_text_color">#ff8080c0</color>
 	
 	<color name="scrubber_track_color">#ffc8de7a</color>

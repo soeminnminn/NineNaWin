@@ -1,23 +1,22 @@
 package com.s16.dhammadroid.fragment;
 
+import com.s16.dhammadroid.Common;
 import com.s16.dhammadroid.R;
-import com.s16.dhammadroid.Utility;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
+import android.preference.ListPreference;
 import android.support.v4.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment
+	implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-	static final String PREFS_ABOUT = "prefs_about"; 
-	
 	private Context mContext;
+	private ListPreference mFontSizePreference;
 	
 	public SettingsFragment() {
 		
@@ -36,22 +35,18 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.settings);
         
-        Preference prefsAbout = findPreference(PREFS_ABOUT);
-        try {
-        	PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
-			prefsAbout.setSummary(pInfo.versionName);
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
+        mFontSizePreference = (ListPreference)findPreference(Common.PREFS_FONT_SIZE);
         
-        prefsAbout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Utility.showAboutDialog(mContext);
-				return false;
-			}
-        });
+        final SharedPreferences sharedPreferences = getPreferenceManager().getSharedPreferences();
+        updateFontSizeSummary(sharedPreferences);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 	}
+	
+	@Override
+    public void onDestroy() {
+        getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
+    }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,5 +56,19 @@ public class SettingsFragment extends PreferenceFragment {
 			mContext = inflater.getContext();
 		}
 		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		if (key.equals(Common.PREFS_FONT_SIZE)) {
+			updateFontSizeSummary(sharedPreferences);
+		}
+	}
+	
+	private void updateFontSizeSummary(SharedPreferences sharedPreferences) {
+		String defFontValue = getResources().getString(R.string.prefs_font_size_default);
+		String value = sharedPreferences.getString(Common.PREFS_FONT_SIZE, defFontValue);
+		String summary = getResources().getStringArray(R.array.prefs_font_size_text)[mFontSizePreference.findIndexOfValue(value)];
+		mFontSizePreference.setSummary(summary);
 	}
 }

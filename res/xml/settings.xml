@@ -19,8 +19,17 @@
     <PreferenceCategory
         android:title="@string/prefs_group_general">
         
-        <Preference
+        <ListPreference 
+            android:key="prefs_font_size"
+            android:title="@string/prefs_font_size"
+            android:persistent="true"
+            android:entryValues="@array/prefs_font_size_values"
+            android:entries="@array/prefs_font_size_text"
+            android:defaultValue="@string/prefs_font_size_default" />
+        
+        <com.s16.app.AboutPreference 
             android:key="prefs_about"
+            android:summary=""
             android:title="@string/prefs_about" />
         
     </PreferenceCategory>
@@ -29,16 +38,24 @@
         android:title="@string/prefs_group_notification">
         
         <VolumePreference
-            android:key="volume_setting"
+            android:key="prefs_alarm_volume"
             android:title="@string/prefs_alarm_volume"
             android:summary="@string/prefs_alarm_volume_summary" 
             android:dialogTitle="@string/prefs_alarm_volume"
             android:streamType="alarm" />
         
         <com.s16.dhammadroid.preference.AlarmPreference
-            android:key="alarm_setting"
+            android:key="prefs_alarm_notification"
             android:title="@string/prefs_alarm_notification"
             android:summary="@string/prefs_alarm_notification_summary" />
+        
+        <CheckBoxPreference
+            android:key="prefs_ninenawin"
+            android:title="@string/prefs_ninenawin"
+            android:persistent="true" 
+            android:defaultValue="true"
+            android:summaryOn="@string/prefs_ninenawin_summary_on"
+            android:summaryOff="@string/prefs_ninenawin_summary_off" />
         
     </PreferenceCategory>
     

@@ -3,7 +3,7 @@ package com.s16.dhammadroid.fragment;
 import java.util.Calendar;
 import java.util.List;
 
-import com.s16.dhammadroid.Constants;
+import com.s16.dhammadroid.Common;
 import com.s16.dhammadroid.R;
 import com.s16.dhammadroid.Utility;
 import com.s16.dhammadroid.data.NineNawinResData;
@@ -50,7 +50,7 @@ public class NineNawinFragment extends Fragment {
 			super(context, 0, objects);
 			mInflater = LayoutInflater.from(context);
 			mContext = context;
-			mTypeface = Constants.getZawgyiTypeface(context);
+			mTypeface = Common.getZawgyiTypeface(context);
 			
 			final Resources res = context.getResources();
 			mBkgGreen = res.getDrawable(R.drawable.ninenawin_bkg_green);

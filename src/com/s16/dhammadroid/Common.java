@@ -4,13 +4,21 @@ import java.io.File;
 import java.io.IOException;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.util.TypedValue;
+import android.widget.TextView;
 
-public class Constants {
+public class Common {
 	
 	public static final String MIME_TYPE = "text/html";
     public static final String ENCODING = "utf-8";
+    
+    public static final String PREFS_ABOUT = "prefs_about"; 
+    public static final String PREFS_FONT_SIZE = "prefs_font_size";
     
     public static final String URL_DEFAULT = "about:blank";
 	public static final String URL_DEFINITION = "file:///android_asset/definition.html";
@@ -24,6 +32,8 @@ public class Constants {
 	private static Typeface SEGMENT_SEVEN_TYPEFACE;
 	private static Typeface HOLO_ICON_TYPEFACE;
 	private static Typeface MATERIAL_ICON_TYPEFACE;
+	
+	private static float[] FONT_SIZE_VALUES;
 	
 	public static File getDataFolder(Context context) {
 		if(DATA_FOLDER == null) {
@@ -103,5 +113,25 @@ public class Constants {
 			MATERIAL_ICON_TYPEFACE = Typeface.createFromAsset(context.getAssets(), "fonts/material_icon.ttf");
 		}
 		return MATERIAL_ICON_TYPEFACE;
+	}
+	
+	public static void setViewTextSize(TextView view) {
+		if (view == null) return;
+		
+		final Context context = view.getContext();
+		final Resources res = context.getResources();
+		
+		if (FONT_SIZE_VALUES == null) {
+			FONT_SIZE_VALUES = new float[] {
+					res.getDimension(R.dimen.detail_text_size_small),
+					res.getDimension(R.dimen.detail_text_size_medium),
+					res.getDimension(R.dimen.detail_text_size_large)
+			};
+		}
+		
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		String defFontValue = res.getString(R.string.prefs_font_size_default);
+		int fontSizeVal = Integer.parseInt(preferences.getString(Common.PREFS_FONT_SIZE, defFontValue));
+		view.setTextSize(TypedValue.COMPLEX_UNIT_PX, FONT_SIZE_VALUES[fontSizeVal]);
 	}
 }

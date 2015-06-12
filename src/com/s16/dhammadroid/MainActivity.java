@@ -1,5 +1,6 @@
 package com.s16.dhammadroid;
 
+import com.s16.app.AboutPreference;
 import com.s16.dhammadroid.data.DhammaDataParser;
 import com.s16.dhammadroid.data.ListDataContainer;
 import com.s16.drawing.FoldingCirclesDrawable;
@@ -7,11 +8,13 @@ import com.s16.drawing.TypefaceSpan;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.MenuItemCompat;
 import android.text.Spannable;
@@ -26,7 +29,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+	implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private MainListFragment mFragment;
 	private ListDataContainer mDataContainer;
@@ -60,6 +64,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,6 +83,13 @@ public class MainActivity extends Activity {
 		}
 		
 		fetchXML();
+		PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(this);
+	}
+	
+	@Override
+    public void onDestroy() {
+		PreferenceManager.getDefaultSharedPreferences(getContext()).unregisterOnSharedPreferenceChangeListener(this);
+		super.onDestroy();
 	}
 
 	@Override
@@ -105,12 +117,21 @@ public class MainActivity extends Activity {
 				performSettings();
 				break;
 			case R.id.action_about:
-				Utility.showAboutDialog(getContext());
+				AboutPreference.showAboutDialog(getContext());
 				break;
 			default:
 				break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		if (Common.PREFS_FONT_SIZE.equals(key)) {
+			if (mDataContainer != null) {
+				setListAdapter(mDataContainer.getAdapter());
+			}
+		}
 	}
 	
 	private void performSettings() {

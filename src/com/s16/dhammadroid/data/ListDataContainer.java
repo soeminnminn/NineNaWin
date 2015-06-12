@@ -3,11 +3,10 @@ package com.s16.dhammadroid.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.s16.dhammadroid.Constants;
+import com.s16.dhammadroid.Common;
 import com.s16.dhammadroid.R;
 import com.s16.dhammadroid.Utility;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -51,7 +50,7 @@ public class ListDataContainer {
 		public String getName();
 		public String getTitle();
 		public int getViewType();
-	    public View getView(LayoutInflater inflater, View convertView);
+	    public View getView(LayoutInflater inflater, View convertView, ViewGroup parent);
 	}
 	
 	public class Header implements ListItem {
@@ -80,19 +79,20 @@ public class ListDataContainer {
 			return RowType.HEADER_ITEM.ordinal();
 		}
 
-		@SuppressLint("InflateParams")
 		@Override
-		public View getView(LayoutInflater inflater, View convertView) {
+		public View getView(LayoutInflater inflater, View convertView, ViewGroup parent) {
 			View view;
 	        if (convertView == null) {
-	            view = (View)inflater.inflate(R.layout.simple_list_header, null);
+	            view = (View)inflater.inflate(R.layout.simple_list_header, parent, false);
 	        } else {
 	            view = convertView;
 	        }
 
 	        TextView text = (TextView)view.findViewById(android.R.id.text1);
-	        text.setTypeface(Constants.getZawgyiTypeface(inflater.getContext()));
+	        Common.setViewTextSize(text);
+	        text.setTypeface(Common.getZawgyiTypeface(inflater.getContext()));
 	        text.setText(getTitle());
+	        view.setClickable(false);
 	        return view;
 		}
 	}
@@ -123,18 +123,18 @@ public class ListDataContainer {
 			return RowType.LIST_ITEM.ordinal();
 		}
 
-		@SuppressLint("InflateParams")
 		@Override
-		public View getView(LayoutInflater inflater, View convertView) {
+		public View getView(LayoutInflater inflater, View convertView, ViewGroup parent) {
 			View view;
 	        if (convertView == null) {
-	            view = (View)inflater.inflate(R.layout.simple_list_item, null);
+	            view = (View)inflater.inflate(R.layout.simple_list_item, parent, false);
 	        } else {
 	            view = convertView;
 	        }
 
 	        TextView text = (TextView)view.findViewById(android.R.id.text1);
-	        text.setTypeface(Constants.getZawgyiTypeface(inflater.getContext()));
+	        Common.setViewTextSize(text);
+	        text.setTypeface(Common.getZawgyiTypeface(inflater.getContext()));
 	        text.setText(getTitle());
 
 	        return view;
@@ -163,7 +163,7 @@ public class ListDataContainer {
 
 	    @Override
 	    public View getView(int position, View convertView, ViewGroup parent) {
-	        return getItem(position).getView(mInflater, convertView);
+	        return getItem(position).getView(mInflater, convertView, parent);
 	    }
 	}
 	

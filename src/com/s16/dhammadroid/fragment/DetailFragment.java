@@ -1,6 +1,6 @@
 package com.s16.dhammadroid.fragment;
 
-import com.s16.dhammadroid.Constants;
+import com.s16.dhammadroid.Common;
 import com.s16.dhammadroid.R;
 import com.s16.dhammadroid.Utility;
 import com.s16.dhammadroid.data.DhammaDataParser;
@@ -8,8 +8,10 @@ import com.s16.widget.LocalWebView;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,9 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment
+	implements SharedPreferences.OnSharedPreferenceChangeListener {
 	
 	private String mTitle;
+	private TextView mTextDesc;
+	private TextView mTextSubTitle;
+	private TextView mTextSubDesc;
 	
 	protected Context getContext() {
 		return getActivity();
@@ -35,7 +41,7 @@ public class DetailFragment extends Fragment {
 		if (entry != null) {
 			mTitle = entry.title;
 			
-			if (Constants.usedDetailWebview()) {
+			if (Common.usedDetailWebview()) {
 				LocalWebView webView = (LocalWebView)rootView.findViewById(R.id.detailWebView);
 				setDefinition(webView, entry);	
 			} else {
@@ -43,15 +49,22 @@ public class DetailFragment extends Fragment {
 			}
 		}
 		
+		PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(this);
 		return rootView;
+	}
+	
+	@Override
+    public void onDestroy() {
+		PreferenceManager.getDefaultSharedPreferences(getContext()).unregisterOnSharedPreferenceChangeListener(this);
+		super.onDestroy();
 	}
 	
 	protected void setDefinition(LocalWebView webView, DhammaDataParser.Entry itemData) {
 		
-		final String newUrl = Constants.URL_DEFINITION + "?name=" + itemData.name;
+		final String newUrl = Common.URL_DEFINITION + "?name=" + itemData.name;
 		String result = getDefinitionHtml(itemData);
 		webView.loadDataWithBaseURL(newUrl, result
-				, Constants.MIME_TYPE, Constants.ENCODING, newUrl);
+				, Common.MIME_TYPE, Common.ENCODING, newUrl);
 	}
 	
 	private String getDefinitionHtml(DhammaDataParser.Entry entry) {
@@ -59,7 +72,7 @@ public class DetailFragment extends Fragment {
 		String html = "<html>";
 		html += "<head>";
 		
-		html += "<meta content=\"" + Constants.MIME_TYPE + "; charset=" + Constants.ENCODING + "\" http-equiv=\"content-type\">";
+		html += "<meta content=\"" + Common.MIME_TYPE + "; charset=" + Common.ENCODING + "\" http-equiv=\"content-type\">";
 		html += "<meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=yes, width=device-width\" />";
 		html += "<meta name=\"Options\" content=\"{'addfont':false, 'drawfix':false}\">";
 		html += "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">";
@@ -96,22 +109,25 @@ public class DetailFragment extends Fragment {
 		ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		detailView.setLayoutParams(params);
 		
-		TextView desc = (TextView)detailView.findViewById(R.id.textDetailDesc);
-		desc.setTypeface(Constants.getZawgyiTypeface(getContext()));
-		desc.setText(Html.fromHtml(Utility.ZawGyiDrawFix(entry.body).toString()));
+		mTextDesc = (TextView)detailView.findViewById(R.id.textDetailDesc);
+		Common.setViewTextSize(mTextDesc);
+		mTextDesc.setTypeface(Common.getZawgyiTypeface(getContext()));
+		mTextDesc.setText(Html.fromHtml(Utility.ZawGyiDrawFix(entry.body).toString()));
 		
-		TextView subTitle = (TextView)detailView.findViewById(R.id.textDetailSubTitle);
-		TextView subDesc = (TextView)detailView.findViewById(R.id.textDetailSubDesc);
+		mTextSubTitle = (TextView)detailView.findViewById(R.id.textDetailSubTitle);
+		mTextSubDesc = (TextView)detailView.findViewById(R.id.textDetailSubDesc);
+		Common.setViewTextSize(mTextSubTitle);
+		Common.setViewTextSize(mTextSubDesc);
 		if (!TextUtils.isEmpty(entry.description_title) && !TextUtils.isEmpty(entry.description_body)) {
-			subTitle.setTypeface(Constants.getZawgyiTypeface(getContext()), Typeface.BOLD);
-			subTitle.setText(Utility.ZawGyiDrawFix(entry.description_title));
+			mTextSubTitle.setTypeface(Common.getZawgyiTypeface(getContext()), Typeface.BOLD);
+			mTextSubTitle.setText(Utility.ZawGyiDrawFix(entry.description_title));
 			
-			subDesc.setTypeface(Constants.getZawgyiTypeface(getContext()));
-			subDesc.setText(Html.fromHtml(Utility.ZawGyiDrawFix(entry.description_body).toString()));
+			mTextSubDesc.setTypeface(Common.getZawgyiTypeface(getContext()));
+			mTextSubDesc.setText(Html.fromHtml(Utility.ZawGyiDrawFix(entry.description_body).toString()));
 			
 		} else {
-			subTitle.setVisibility(View.GONE);
-			subDesc.setVisibility(View.GONE);
+			mTextSubTitle.setVisibility(View.GONE);
+			mTextSubDesc.setVisibility(View.GONE);
 		}
 		rootView.addView(detailView);
 	}
@@ -135,6 +151,15 @@ public class DetailFragment extends Fragment {
 			return extras.getString("name", "");
 		} else {
 			return "";
+		}
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		if (Common.PREFS_FONT_SIZE.equals(key)) {
+			Common.setViewTextSize(mTextDesc);
+			Common.setViewTextSize(mTextSubTitle);
+			Common.setViewTextSize(mTextSubDesc);
 		}
 	}
 }

@@ -1,7 +1,5 @@
 package com.s16.drawing;
 
-import com.s16.dhammadroid.R;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -255,7 +253,12 @@ public class FoldingCirclesDrawable extends Drawable implements Drawable.Callbac
 
         private void initDefaults(Context context) {
             //Default values
-            mColors = context.getResources().getIntArray(R.array.gpb_google_colors);
+        	mColors = new int[] { 
+	        	0xFFC93437, // red
+	        	0xFF375BF1, // blue
+	        	0xFFF7D23E, // yellow
+	        	0xFF34A350  // green
+        	};
         }
 
         public Builder colors(int[] colors) {

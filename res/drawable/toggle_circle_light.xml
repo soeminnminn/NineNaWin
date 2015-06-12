@@ -15,11 +15,15 @@
   ~ limitations under the License
   -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <bitmap
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_activated="true">
+		 <bitmap
             android:src="@drawable/bg_day_selected_light"
-            android:tint="@color/bg_day_tint_color_light"
+            android:tint="@color/app_color_accent"
             android:gravity="center" />
-    </item>
-</layer-list>
+	 </item>
+
+    <item android:drawable="@drawable/transparent"/>
+
+</selector>

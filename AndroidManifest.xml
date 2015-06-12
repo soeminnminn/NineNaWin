@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.s16.dhammadroid"
     android:versionCode="1"
-    android:versionName="1.0.0.20150331" >
+    android:versionName="1.0.0.20150526" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -48,17 +48,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.s16.dhammadroid.MainActivity" />
-        </activity>
-        
-        <activity
-            android:name=".test.DownloadDataActivity"
-            android:label="@string/app_name" >
-        </activity>
-        
-        <activity
-            android:name=".test.ZoomTestActivity"
-            android:label="@string/app_name" >
-            
         </activity>
         
     </application>

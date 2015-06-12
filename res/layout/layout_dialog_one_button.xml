@@ -3,7 +3,8 @@
     android:id="@+id/layoutButtonBar"
     style="@style/ButtonBar"
     android:layout_width="match_parent"
-    android:layout_alignParentBottom="true" >
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical" >
     
 	<Button
 	    android:id="@android:id/closeButton"

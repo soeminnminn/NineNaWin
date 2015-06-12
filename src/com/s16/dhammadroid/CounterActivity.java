@@ -96,9 +96,9 @@ public class CounterActivity extends Activity {
 				R.drawable.jog_tab_bar_right_generic, R.drawable.jog_tab_right_generic);
 		
 		mTxtRound = (TextView)findViewById(R.id.txtRoundValue);
-		mTxtRound.setTypeface(Constants.getSegmentSevenTypeface(getContext()));
+		mTxtRound.setTypeface(Common.getSegmentSevenTypeface(getContext()));
 		mTxtCount = (TextView)findViewById(R.id.txtCountValue);
-		mTxtCount.setTypeface(Constants.getSegmentSevenTypeface(getContext()));
+		mTxtCount.setTypeface(Common.getSegmentSevenTypeface(getContext()));
 		
 		if (savedInstanceState != null) {
 			mRound = savedInstanceState.getInt(SAVE_STATE_ROUND);

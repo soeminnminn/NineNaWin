@@ -7,14 +7,10 @@ import java.util.Map;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -34,18 +30,37 @@ public class DataTable {
 	private final String mTableName;
 	private final ArrayList<DataColumn> mColumns = new ArrayList<DataColumn>();
 	private SQLiteDatabase mDatabase;
-	private Executor mExecutor; 
+	private Executor mExecutor;
+	private int mId;
 	
 	public static DataTable newInstance(String authority, String tableName) {
 		return new DataTable(authority, tableName); 
 	}
 	
+	public static DataTable newInstance(String authority, int id, String tableName) {
+		return new DataTable(authority, id, tableName); 
+	}
+	
 	public DataTable(String authority, String tableName) {
+		this(authority, tableName.hashCode(), tableName);
+	}
+	
+	public DataTable(String authority, int id, String tableName) {
 		mAuthority = authority;
 		mTableName = tableName;
 		mExecutor = new Executor();
+		mId = id;
 	}
 	
+	public int getId() {
+		return mId;
+	}
+
+	public DataTable setId(int id) {
+		mId = id;
+		return this;
+	}
+
 	protected void assertTable() {
         if (mTableName == null) {
             throw new IllegalStateException("Table not specified");
@@ -305,7 +320,7 @@ public class DataTable {
 		
 		sql += ");";
 		
-		Log.i("createStatement", sql);
+		Log.w("createStatement", sql);
 		return sql;
 	}
 	
@@ -443,414 +458,6 @@ public class DataTable {
 		}
 	}
 	
-	public class DataCursor implements Cursor {
-		private final Cursor mCursor;
-		
-		private DataCursor(Cursor cursor) {
-			mCursor = cursor;
-		}
-		
-		public boolean isEmpty() {
-			if (mCursor == null) return true;
-			if (mCursor.getCount() == 0) return true;
-			return false;
-		}
-
-		@Override
-		public int getCount() {
-			if (mCursor != null) {
-				return mCursor.getCount();
-			}
-			return 0;
-		}
-
-		@Override
-		public int getPosition() {
-			if (mCursor != null) {
-				return mCursor.getPosition();
-			}
-			return 0;
-		}
-
-		@Override
-		public boolean move(int offset) {
-			if (mCursor != null) {
-				return mCursor.move(offset);
-			}
-			return false;
-		}
-
-		@Override
-		public boolean moveToPosition(int position) {
-			if (mCursor != null) {
-				return mCursor.moveToPosition(position);
-			}
-			return false;
-		}
-
-		@Override
-		public boolean moveToFirst() {
-			if (mCursor != null) {
-				return mCursor.moveToFirst();
-			}
-			return false;
-		}
-
-		@Override
-		public boolean moveToLast() {
-			if (mCursor != null) {
-				return mCursor.moveToLast();
-			}
-			return false;
-		}
-
-		@Override
-		public boolean moveToNext() {
-			if (mCursor != null) {
-				return mCursor.moveToNext();
-			}
-			return false;
-		}
-
-		@Override
-		public boolean moveToPrevious() {
-			if (mCursor != null) {
-				return mCursor.moveToPrevious();
-			}
-			return false;
-		}
-
-		@Override
-		public boolean isFirst() {
-			if (mCursor != null) {
-				return mCursor.isFirst();
-			}
-			return false;
-		}
-
-		@Override
-		public boolean isLast() {
-			if (mCursor != null) {
-				return mCursor.isLast();
-			}
-			return false;
-		}
-
-		@Override
-		public boolean isBeforeFirst() {
-			if (mCursor != null) {
-				return mCursor.isBeforeFirst();
-			}
-			return false;
-		}
-
-		@Override
-		public boolean isAfterLast() {
-			if (mCursor != null) {
-				return mCursor.isAfterLast();
-			}
-			return false;
-		}
-
-		@Override
-		public int getColumnIndex(String columnName) {
-			if (mCursor != null) {
-				return mCursor.getColumnIndex(columnName);
-			}
-			return 0;
-		}
-
-		@Override
-		public int getColumnIndexOrThrow(String columnName)
-				throws IllegalArgumentException {
-			if (mCursor != null) {
-				return mCursor.getColumnIndexOrThrow(columnName);
-			}
-			return 0;
-		}
-
-		@Override
-		public String getColumnName(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getColumnName(columnIndex);
-			}
-			return null;
-		}
-
-		@Override
-		public String[] getColumnNames() {
-			if (mCursor != null) {
-				return mCursor.getColumnNames();
-			}
-			return null;
-		}
-
-		@Override
-		public int getColumnCount() {
-			if (mCursor != null) {
-				return mCursor.getColumnCount();
-			}
-			return 0;
-		}
-
-		@Override
-		public byte[] getBlob(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getBlob(columnIndex);
-			}
-			return null;
-		}
-		
-		public byte[] getBlob(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getBlob(columnIndex);
-			}
-			return null;
-		}
-
-		@Override
-		public String getString(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getString(columnIndex);
-			}
-			return null;
-		}
-		
-		public String getString(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getString(columnIndex);
-			}
-			return null;
-		}
-
-		@Override
-		public void copyStringToBuffer(int columnIndex, CharArrayBuffer buffer) {
-			if (mCursor != null) {
-				mCursor.copyStringToBuffer(columnIndex, buffer);
-			}
-		}
-		
-		public void copyStringToBuffer(String columnName, CharArrayBuffer buffer) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				mCursor.copyStringToBuffer(columnIndex, buffer);
-			}
-		}
-
-		@Override
-		public short getShort(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getShort(columnIndex);
-			}
-			return 0;
-		}
-		
-		public short getShort(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getShort(columnIndex);
-			}
-			return 0;
-		}
-
-		@Override
-		public int getInt(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getInt(columnIndex);
-			}
-			return 0;
-		}
-		
-		public int getInt(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getInt(columnIndex);
-			}
-			return 0;
-		}
-
-		@Override
-		public long getLong(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getLong(columnIndex);
-			}
-			return 0;
-		}
-		
-		public long getLong(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getLong(columnIndex);
-			}
-			return 0;
-		}
-
-		@Override
-		public float getFloat(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getFloat(columnIndex);
-			}
-			return 0;
-		}
-		
-		public float getFloat(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getFloat(columnIndex);
-			}
-			return 0;
-		}
-
-		@Override
-		public double getDouble(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getDouble(columnIndex);
-			}
-			return 0;
-		}
-		
-		public double getDouble(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getDouble(columnIndex);
-			}
-			return 0;
-		}
-
-		@Override
-		public int getType(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.getType(columnIndex);
-			}
-			return 0;
-		}
-		
-		public int getType(String columnName) {
-			if (!isNull(columnName)) {
-				int columnIndex = getColumnIndex(columnName);
-				return mCursor.getType(columnIndex);
-			}
-			return 0;
-		}
-
-		@Override
-		public boolean isNull(int columnIndex) {
-			if (mCursor != null) {
-				return mCursor.isNull(columnIndex);
-			}
-			return false;
-		}
-		
-		public boolean isNull(String columnName) {
-			if (isEmpty()) return true;
-			if ((columnName == null) || (columnName == "")) return true;
-			int columnIndex = mCursor.getColumnIndex(columnName);
-			if (columnIndex < 0) return true;
-			return mCursor.isNull(columnIndex);
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void deactivate() {
-			if (mCursor != null) {
-				mCursor.deactivate();
-			}
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public boolean requery() {
-			if (mCursor != null) {
-				return mCursor.requery();
-			}
-			return false;
-		}
-
-		@Override
-		public void close() {
-			if (mCursor != null) {
-				mCursor.close();
-			}
-		}
-
-		@Override
-		public boolean isClosed() {
-			if (mCursor != null) {
-				return mCursor.isClosed();
-			}
-			return false;
-		}
-
-		@Override
-		public void registerContentObserver(ContentObserver observer) {
-			if (mCursor != null) {
-				mCursor.registerContentObserver(observer);
-			}
-		}
-
-		@Override
-		public void unregisterContentObserver(ContentObserver observer) {
-			if (mCursor != null) {
-				mCursor.unregisterContentObserver(observer);
-			}
-		}
-
-		@Override
-		public void registerDataSetObserver(DataSetObserver observer) {
-			if (mCursor != null) {
-				mCursor.registerDataSetObserver(observer);
-			}
-		}
-
-		@Override
-		public void unregisterDataSetObserver(DataSetObserver observer) {
-			if (mCursor != null) {
-				mCursor.unregisterDataSetObserver(observer);
-			}
-		}
-
-		@Override
-		public void setNotificationUri(ContentResolver cr, Uri uri) {
-			if (mCursor != null) {
-				mCursor.setNotificationUri(cr, uri);
-			}
-		}
-
-		@Override
-		public Uri getNotificationUri() {
-			if (mCursor != null) {
-				return mCursor.getNotificationUri();
-			}
-			return null;
-		}
-
-		@Override
-		public boolean getWantsAllOnMoveCalls() {
-			if (mCursor != null) {
-				return mCursor.getWantsAllOnMoveCalls();
-			}
-			return false;
-		}
-
-		@Override
-		public Bundle getExtras() {
-			if (mCursor != null) {
-				return mCursor.getExtras();
-			}
-			return null;
-		}
-
-		@Override
-		public Bundle respond(Bundle extras) {
-			if (mCursor != null) {
-				return mCursor.respond(extras);
-			}
-			return null;
-		}
-	}
-	
 	public class Executor {
 		
 		private Map<String, String> mProjectionMap = new HashMap<String, String>();
@@ -951,28 +558,50 @@ public class DataTable {
 	    /**
 	     * Execute query using the current internal state as {@code WHERE} clause.
 	     */
-	    public DataCursor query(String orderBy, String limit) {
+	    public Cursor query(boolean distinct, String orderBy, String limit) {
+	        return query(distinct, getColumnNames(), null, null, orderBy, limit);
+	    }
+	    
+	    /**
+	     * Execute query using the current internal state as {@code WHERE} clause.
+	     */
+	    public Cursor query(String orderBy, String limit) {
 	        return query(getColumnNames(), null, null, orderBy, limit);
 	    }
 	    
 	    /**
 	     * Execute query using the current internal state as {@code WHERE} clause.
 	     */
-	    public DataCursor query(String[] columns, String orderBy, String limit) {
+	    public Cursor query(String[] columns, String orderBy, String limit) {
 	        return query(columns, null, null, orderBy, limit);
+	    }
+	    
+	    /**
+	     * Execute query using the current internal state as {@code WHERE} clause.
+	     */
+	    public Cursor query(boolean distinct, String[] columns, String orderBy, String limit) {
+	        return query(distinct, columns, null, null, orderBy, limit);
 	    }
 
 	    /**
 	     * Execute query using the current internal state as {@code WHERE} clause.
 	     */
-	    public DataCursor query(String[] columns, String groupBy,
+	    public Cursor query(String[] columns, String groupBy,
+                String having, String orderBy, String limit) {
+	    	return query(false, columns, groupBy, having, orderBy, limit);
+	    }
+	    
+	    /**
+	     * Execute query using the current internal state as {@code WHERE} clause.
+	     */
+	    public Cursor query(boolean distinct, String[] columns, String groupBy,
 	                        String having, String orderBy, String limit) {
 	        assertTable();
 	        assertDatabase();
 	        if (columns != null) mapColumns(columns);
-	        Cursor cursor = mDatabase.query(mTableName, columns, getSelection(), getSelectionArgs(), groupBy, having,
+	        Cursor cursor = mDatabase.query(distinct, mTableName, columns, getSelection(), getSelectionArgs(), groupBy, having,
 	                orderBy, limit);
-	        return new DataCursor(cursor);
+	        return cursor;
 	    }
 	    
 	    /**

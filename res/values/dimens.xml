@@ -13,8 +13,8 @@
     <fraction name="bottombar_height">10.0%p</fraction>
     
     <dimen name="detail_content_horizontal_margin">12dip</dimen>
-    <dimen name="detail_content_vertical_padding">12dip</dimen>
-    <dimen name="detail_content_vertical_margin">22dip</dimen>
+    <dimen name="detail_content_vertical_margin">12dip</dimen>
+    <dimen name="detail_content_bottom_margin">44dip</dimen>
     
     <dimen name="player_time_horizontal_margin">4dip</dimen>
     <dimen name="player_time_vertical_margin">6dip</dimen>
@@ -40,5 +40,13 @@
     <dimen name="fab_button_vertical_margin">0.1in</dimen>
     
     <dimen name="count_text_size">32sp</dimen>
+    
+    <dimen name="default_text_size_small">14sp</dimen>
+    <dimen name="default_text_size_medium">18sp</dimen>
+    <dimen name="default_text_size_large">22sp</dimen>
+    
+    <dimen name="detail_text_size_small">14sp</dimen>
+    <dimen name="detail_text_size_medium">16sp</dimen>
+    <dimen name="detail_text_size_large">18sp</dimen>
     
 </resources>

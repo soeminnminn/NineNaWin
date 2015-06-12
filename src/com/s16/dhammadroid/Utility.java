@@ -3,16 +3,10 @@ package com.s16.dhammadroid;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.R.color;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
-import android.widget.TextView;
 
 public class Utility {
 	
@@ -196,29 +190,4 @@ public class Utility {
 	    float dp = px / (metrics.densityDpi / 160f);
 	    return dp;
 	}
-	
-	public static void showAboutDialog(Context context) {
-    	
-		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-		dialogBuilder.setIcon(android.R.drawable.ic_dialog_info);
-		dialogBuilder.setTitle(R.string.action_about);
-		
-		String html = context.getText(R.string.about_text).toString();
-		final TextView message = new TextView(context);
-		message.setPadding((int)convertDpToPixel(10f, context), (int)convertDpToPixel(10f, context), 
-				(int)convertDpToPixel(10f, context), (int)convertDpToPixel(10f, context));
-		message.setTextColor(context.getResources().getColor(color.primary_text_light));
-		message.setMovementMethod(LinkMovementMethod.getInstance());
-		message.setText(Html.fromHtml(html));
-		dialogBuilder.setView(message);
-		
-		dialogBuilder.setNegativeButton(context.getText(android.R.string.ok), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
-		dialogBuilder.setPositiveButton(null, null);
-		dialogBuilder.show();
-    }
 }

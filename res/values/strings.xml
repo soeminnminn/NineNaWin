@@ -32,13 +32,20 @@
     <string name="damma_news_url">http://www.pyephyohan.info/json_files/idhamma/android_news.xml</string>
     
     <string name="prefs_group_general">General</string>
-    <string name="prefs_group_notification">Notification</string>
+    <string name="prefs_font_size">Font Size</string>
+    <string name="prefs_font_size_default">1</string>
+    <string-array name="prefs_font_size_text">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+    <string-array name="prefs_font_size_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
     <string name="prefs_about">About</string>
-    <string name="prefs_alarm_volume">Alarm Volume</string>
-    <string name="prefs_alarm_volume_summary">Change alarm volume.</string>
-    <string name="prefs_alarm_notification">Alarm</string>
-    <string name="prefs_alarm_notification_summary">Setup alarm and notification.</string>
-    
+    <string name="version_text">Version - %s</string>
     <string name="about_text"><Data>
 <![CDATA["
       <p><b>Dhamma Droid</b></p>
@@ -46,5 +53,14 @@
       <p>Copyright \u00A9 2015 The Android Open Source Project</p>
       "]]>
 </Data></string>
+    
+    <string name="prefs_group_notification">Notification</string>
+    <string name="prefs_alarm_volume">Alarm Volume</string>
+    <string name="prefs_alarm_volume_summary">Change alarm volume.</string>
+    <string name="prefs_alarm_notification">Alarm</string>
+    <string name="prefs_alarm_notification_summary">Setup alarm and notification.</string>
+    <string name="prefs_ninenawin">9 Nawin Notification</string>
+    <string name="prefs_ninenawin_summary_on">9 Nawin Notification</string>
+    <string name="prefs_ninenawin_summary_off">9 Nawin Notification</string>
 
 </resources>

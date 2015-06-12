@@ -1,5 +1,10 @@
 package com.s16.data;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
+
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -10,15 +15,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.BaseColumns;
+import android.text.TextUtils;
 
 public abstract class AbstractDataProvider extends ContentProvider {
 
 	protected static final String TAG = AbstractDataProvider.class.getSimpleName();
 	
+	public static final String METHOD_BACKUP = "backup";
+	public static final String METHOD_RESTORE = "restore";
 	public static final String METHOD_SAVE = "save";
 	public static final String METHOD_GETMAXID = "getMaxId";
 	public static final String RETURN_KEY = "result";
+	
+	private static final String DATABASE_NAME = "database";
+	private static final int DATABASE_VERSION = 1;
+	
+	private SQLiteDatabase mDatabase;
+	private String mDatabasePath;
 	
 	private class DatabaseHelper extends SQLiteOpenHelper {		
 
@@ -56,15 +71,21 @@ public abstract class AbstractDataProvider extends ContentProvider {
 		mTables = getAllTables();
 	}
 	
-	protected abstract String getDatabaseName();
+	protected String getDatabaseName() {
+		return DATABASE_NAME;
+	}
 	
-	protected abstract int getDatabaseVersion();
+	protected int getDatabaseVersion() {
+		return DATABASE_VERSION;
+	}
 	
 	protected abstract Uri getContentUri();
 	
 	protected abstract DataTable[] getAllTables();
 	
 	protected abstract DataTable getTable(Uri uri);
+	
+	protected abstract boolean useDistinct(Uri uri);
 	
 	@Override
 	public abstract String getType(Uri uri);
@@ -80,16 +101,23 @@ public abstract class AbstractDataProvider extends ContentProvider {
 	}
 	
 	protected SQLiteDatabase getDatabase() {
-		SQLiteDatabase database = null;
-		if(mDbHelper == null) return database;
-		
-		try {
-			database = mDbHelper.getWritableDatabase();
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		if (mDatabase == null) {
+			if(mDbHelper == null) return null;
+			try {
+				mDatabase = mDbHelper.getWritableDatabase();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
 		}
 		
-		return database;
+		return mDatabase;
+	}
+	
+	protected File getDatabasePath() {
+		if (!TextUtils.isEmpty(mDatabasePath)) {
+			return new File(mDatabasePath);
+		}
+		return null;
 	}
 	
 	public boolean isOpen() {
@@ -106,7 +134,13 @@ public abstract class AbstractDataProvider extends ContentProvider {
 		if(mDbHelper == null) {
 			mDbHelper = new DatabaseHelper(getContext());
 		}
-		return (getDatabase() != null);
+		
+		SQLiteDatabase database = getDatabase();
+		if (database != null) {
+			mDatabasePath = database.getPath();
+		}
+		
+		return (database != null);
 	}
 
 	@Override
@@ -116,10 +150,14 @@ public abstract class AbstractDataProvider extends ContentProvider {
 		final SQLiteDatabase database = getDatabase();
 		if (database == null) return result;
 		
+		boolean distinct = useDistinct(uri);
 		DataTable table = getTable(uri);
 		if (table != null) {
-			if (projection == null) projection = table.getColumnNames();
-			result = table.from(database).where(selection, selectionArgs).query(sortOrder, null);
+			if (projection == null) {
+				result = table.from(database).where(selection, selectionArgs).query(distinct, sortOrder, null);
+			} else {
+				result = table.from(database).where(selection, selectionArgs).query(distinct, projection, sortOrder, null);	
+			}
 			if (result != null) {
 				result.moveToFirst();
 				result.setNotificationUri(getContext().getContentResolver(), uri);
@@ -230,10 +268,58 @@ public abstract class AbstractDataProvider extends ContentProvider {
 	}
 	
 	@Override
+    public int bulkInsert(Uri uri, ContentValues[] insertValuesArray) {
+		final SQLiteDatabase database = getDatabase();
+		if (database == null) return -1;
+		if (insertValuesArray == null) return -1;
+		
+		DataTable table = getTable(uri);
+		if (table != null) {
+			int count = insertValuesArray.length;
+			database.beginTransaction();
+			
+			for (int i=0; i<count; i++) {
+				int resultCount = 0;	
+				ContentValues values = insertValuesArray[i];
+				if (values.containsKey(BaseColumns._ID)) {
+					long id = values.getAsLong(BaseColumns._ID);
+					if (id > 0) {
+						String selection = BaseColumns._ID + " IS ?";
+						resultCount = table.from(database).where(selection, new String[] { String.valueOf(id) }).update(values);
+					}
+				}
+				
+				if (resultCount == 0) {
+					table.from(database).insert(values);
+				}
+			}
+			
+			database.setTransactionSuccessful();
+			database.endTransaction();
+			
+			getContext().getContentResolver().notifyChange(uri, null);
+			return count;
+		}
+		return -1;
+	}
+	
+	@Override
 	public Bundle call(String method, String arg, Bundle extras) {
 		Bundle resultBundle = new Bundle();
 		
-		 if (METHOD_SAVE.equals(method)) {
+		if (METHOD_BACKUP.equals(method)) {
+			File srcDb = getDatabasePath();
+			File destDb = new File(arg);
+			boolean result = copyFile(srcDb, destDb);
+			resultBundle.putBoolean(RETURN_KEY, result);
+			
+		} else if (METHOD_RESTORE.equals(method)) {
+			File srcDb = new File(arg);
+			File destDb = getDatabasePath();
+			boolean result = copyFile(srcDb, destDb);
+			resultBundle.putBoolean(RETURN_KEY, result);
+			
+		} else if (METHOD_SAVE.equals(method)) {
 			ContentValues values = new ContentValues();
 			String[] columns = extras.getStringArray("columns");
 			for(String col : columns) {
@@ -251,5 +337,23 @@ public abstract class AbstractDataProvider extends ContentProvider {
 		}
 		
 		return resultBundle;
+	}
+	
+	@SuppressWarnings("resource")
+	protected boolean copyFile(File srcFile, File destFile) {
+		try {
+            File sd = Environment.getExternalStorageDirectory();
+            if (sd.canWrite() && sd.canRead()) {
+	            FileChannel src = new FileInputStream(srcFile).getChannel();
+	            FileChannel dst = new FileOutputStream(destFile).getChannel();
+	            dst.transferFrom(src, 0, src.size());
+	            src.close();
+	            dst.close();
+	        }
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    	return false;
+	    }
+		return true;
 	}
 }

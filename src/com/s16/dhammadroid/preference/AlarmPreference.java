@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.Color;
 import android.media.Ringtone;
@@ -29,6 +30,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.preference.Preference;
 import android.provider.MediaStore;
+import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
@@ -293,7 +295,10 @@ public class AlarmPreference extends Preference {
     private final Runnable mScrollRunnable = new Runnable() {
         @Override
         public void run() {
-        	// Nothing
+        	if (mAlarmView != null && mParentList != null) {
+        		Rect rect = new Rect(mAlarmView.getLeft(), mAlarmView.getTop(), mAlarmView.getRight(), mAlarmView.getBottom());
+        		mParentList.requestChildRectangleOnScreen(mAlarmView, rect, false);
+        	}
         }
     };
     
@@ -330,7 +335,8 @@ public class AlarmPreference extends Preference {
 	private View mHairLine;
 	private View mArrow;
 	private View mCollapseExpandArea;
-	private ListView mAlarmsList;
+	private View mAlarmView;
+	private ListView mParentList;
 	
 	private boolean mHasVibrator;
 	private Typeface mRobotoThin;
@@ -394,7 +400,7 @@ public class AlarmPreference extends Preference {
 	
 	@Override
 	protected View onCreateView(ViewGroup parent) {
-		View view = super.onCreateView(parent);
+		mAlarmView = super.onCreateView(parent);
 		
 		if (parent != null) {
 			if (parent.getContext() instanceof Activity) {
@@ -402,26 +408,26 @@ public class AlarmPreference extends Preference {
 			}
 			
 			if (parent instanceof ListView) {
-				mAlarmsList = (ListView)parent;
+				mParentList = (ListView)parent;
 			}
 		}
 		
-		mAlarmItem = (LinearLayout) view.findViewById(R.id.alarm_item);
-		mTitle = (TextView) view.findViewById(R.id.title);
-        mTomorrowLabel = (TextView) view.findViewById(R.id.tomorrowLabel);
-        mClock = (TextTime) view.findViewById(R.id.digital_clock);
+		mAlarmItem = (LinearLayout) mAlarmView.findViewById(R.id.alarm_item);
+		mTitle = (TextView) mAlarmView.findViewById(R.id.title);
+        mTomorrowLabel = (TextView) mAlarmView.findViewById(R.id.tomorrowLabel);
+        mClock = (TextTime) mAlarmView.findViewById(R.id.digital_clock);
         mClock.setTypeface(mRobotoThin);
-        mOnoff = (Switch) view.findViewById(R.id.onoff);
+        mOnoff = (Switch) mAlarmView.findViewById(R.id.onoff);
         mOnoff.setTypeface(mRobotoNormal);
-        mLabel = (TextView) view.findViewById(R.id.label);
-        mDaysOfWeek = (TextView) view.findViewById(R.id.daysOfWeek);
-        mSummary = view.findViewById(R.id.summary);
-        mExpandArea = view.findViewById(R.id.expand_area);
-        mHairLine = view.findViewById(R.id.hairline);
-        mArrow = view.findViewById(R.id.arrow);
-        mRepeat = (CheckBox) view.findViewById(R.id.repeat_onoff);
-        mRepeatDays = (LinearLayout) view.findViewById(R.id.repeat_days);
-        mCollapseExpandArea = view.findViewById(R.id.collapse_expand);
+        mLabel = (TextView) mAlarmView.findViewById(R.id.label);
+        mDaysOfWeek = (TextView) mAlarmView.findViewById(R.id.daysOfWeek);
+        mSummary = mAlarmView.findViewById(R.id.summary);
+        mExpandArea = mAlarmView.findViewById(R.id.expand_area);
+        mHairLine = mAlarmView.findViewById(R.id.hairline);
+        mArrow = mAlarmView.findViewById(R.id.arrow);
+        mRepeat = (CheckBox) mAlarmView.findViewById(R.id.repeat_onoff);
+        mRepeatDays = (LinearLayout) mAlarmView.findViewById(R.id.repeat_days);
+        mCollapseExpandArea = mAlarmView.findViewById(R.id.collapse_expand);
         
         // Build button for each day.
         int textColor = getContext().getResources().getColor(R.color.alarm_clock_gray);
@@ -439,10 +445,10 @@ public class AlarmPreference extends Preference {
             mDayButtons[i] = dayButton;
         }
         
-        mVibrate = (CheckBox) view.findViewById(R.id.vibrate_onoff);
-        mRingtone = (TextView) view.findViewById(R.id.choose_ringtone);
+        mVibrate = (CheckBox) mAlarmView.findViewById(R.id.vibrate_onoff);
+        mRingtone = (TextView) mAlarmView.findViewById(R.id.choose_ringtone);
 		
-		return view;
+		return mAlarmView;
 	}
 	
 	@Override
@@ -757,10 +763,10 @@ public class AlarmPreference extends Preference {
 	private void setAlarmItemBackgroundAndElevation(LinearLayout layout, boolean expanded) {
         if (expanded) {
             layout.setBackgroundColor(getTintedBackgroundColor());
-            layout.setElevation(ALARM_ELEVATION);
+            ViewCompat.setElevation(layout, ALARM_ELEVATION);
         } else {
             layout.setBackgroundResource(R.drawable.alarm_background_normal);
-            layout.setElevation(0);
+            ViewCompat.setElevation(layout, 0f);
         }
     }
 	
@@ -822,7 +828,7 @@ public class AlarmPreference extends Preference {
             @Override
             public void onClick(View view) {
                 // Animate the resulting layout changes.
-                TransitionManager.beginDelayedTransition(mAlarmsList, mRepeatTransition);
+                TransitionManager.beginDelayedTransition(mParentList, mRepeatTransition);
 
                 final boolean checked = ((CheckBox)view).isChecked();
                 if (checked) {
@@ -862,7 +868,7 @@ public class AlarmPreference extends Preference {
                         // See if this was the last day, if so, un-check the repeat box.
                         if (!mAlarm.isRepeating()) {
                             // Animate the resulting layout changes.
-                            TransitionManager.beginDelayedTransition(mAlarmsList, mRepeatTransition);
+                            TransitionManager.beginDelayedTransition(mParentList, mRepeatTransition);
 
                             mRepeat.setChecked(false);
                             mRepeatDays.setVisibility(View.GONE);
@@ -905,6 +911,7 @@ public class AlarmPreference extends Preference {
     }
 	
 	private void expandAlarm(boolean animate) {
+		if (mExpanded) return;
 		mExpanded = true;
 		
 		bindExpandArea();
@@ -921,7 +928,7 @@ public class AlarmPreference extends Preference {
 		// Show digital time in full-opaque when expanded, even when alarm is disabled
         setDigitalTimeAlpha(true /* enabled */);
         
-		if (!animate || mAlarmsList == null) {
+		if (!animate || mParentList == null) {
 			// Set the "end" layout and don't do the animation.
 			mArrow.setRotation(ROTATE_180_DEGREE);
 			return;
@@ -937,7 +944,7 @@ public class AlarmPreference extends Preference {
         //  * request another layout pass.
         //  * return false so that onDraw() is not called for the single frame before
         //    the animations have started.
-		final ViewTreeObserver observer = mAlarmsList.getViewTreeObserver();
+		final ViewTreeObserver observer = mParentList.getViewTreeObserver();
 		observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
 			
 			@Override
@@ -1016,8 +1023,34 @@ public class AlarmPreference extends Preference {
 		});
 	}
 	
+	private void bindNoneExpandArea() {
+		if (mAlarm.isRepeating()) {
+        	mTomorrowLabel.setVisibility(View.GONE);
+        } else {
+        	mTomorrowLabel.setVisibility(View.VISIBLE);
+        	final Resources resources = getContext().getResources();
+        	final String labelText = isTomorrow(mAlarm) ?
+                    resources.getString(R.string.alarm_tomorrow) :
+                    resources.getString(R.string.alarm_today);
+            mTomorrowLabel.setText(labelText);
+        }
+		
+		// Set the repeat text or leave it blank if it does not repeat.
+        final String daysOfWeekStr = mAlarm.getDaysOfWeekString(getContext(), false, false);
+        if (daysOfWeekStr != null && daysOfWeekStr.length() != 0) {
+            mDaysOfWeek.setText(daysOfWeekStr);
+            mDaysOfWeek.setContentDescription(mAlarm.getDaysOfWeekString(getContext(), false, true));
+            mDaysOfWeek.setVisibility(View.VISIBLE);
+        } else {
+            mDaysOfWeek.setVisibility(View.GONE);
+        }
+	}
+	
 	private void collapseAlarm(boolean animate) {
+		if (!mExpanded) return;
 		mExpanded = false;
+		
+		bindNoneExpandArea();
 		
 		// Save the starting height so we can animate from this value.
         final int startingHeight = mAlarmItem.getHeight();
@@ -1027,7 +1060,7 @@ public class AlarmPreference extends Preference {
 		mExpandArea.setVisibility(View.GONE);
 		setDigitalTimeAlpha(mOnoff.isChecked());
 		
-		if (!animate || mAlarmsList == null) {
+		if (!animate || mParentList == null) {
 			// Set the "end" layout and don't do the animation.
 			mArrow.setRotation(0);
 			mHairLine.setTranslationY(0);
@@ -1044,7 +1077,7 @@ public class AlarmPreference extends Preference {
         //  * request another layout pass.
         //  * return false so that onDraw() is not called for the single frame before
         //    the animations have started.
-		final ViewTreeObserver observer = mAlarmsList.getViewTreeObserver();
+		final ViewTreeObserver observer = mParentList.getViewTreeObserver();
         observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {

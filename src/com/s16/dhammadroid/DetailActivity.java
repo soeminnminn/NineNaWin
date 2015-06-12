@@ -3,6 +3,8 @@ package com.s16.dhammadroid;
 import java.io.File;
 import java.util.Calendar;
 
+import com.s16.app.AboutPreference;
+import com.s16.app.ActivityHelper;
 import com.s16.dhammadroid.data.DhammaDataParser;
 import com.s16.dhammadroid.data.ListDataContainer;
 import com.s16.dhammadroid.data.NineNawinResData;
@@ -13,7 +15,6 @@ import com.s16.dhammadroid.fragment.NineNawinSetDateFragment;
 import com.s16.drawing.TypefaceSpan;
 import com.s16.widget.SlidingUpTabDrawer;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.Fragment;
@@ -26,19 +27,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.app.SystemUiUtils;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -131,7 +129,7 @@ public class DetailActivity extends Activity {
 		public boolean canPlayAudio(int position) {
 			DhammaDataParser.Entry entry = getEntry(position);
 			if (entry != null && !TextUtils.isEmpty(entry.soundFile)) {
-				File audioDir = Constants.getAudioFolder(getContext());
+				File audioDir = Common.getAudioFolder(getContext());
 				if (audioDir != null) {
 					File audioFile = new File(audioDir, entry.soundFile);
 					return audioFile.exists();
@@ -253,7 +251,7 @@ public class DetailActivity extends Activity {
 			if (!TextUtils.isEmpty(mAudioFileUrl)) {
 				long refrenceId = getDownloadRefId();
 				if (refrenceId < 0) {
-					refrenceId = mDownloader.download(mAudioFileUrl, Constants.getAudioFolder(getApplicationContext()), mAudioFileName);
+					refrenceId = mDownloader.download(mAudioFileUrl, Common.getAudioFolder(getApplicationContext()), mAudioFileName);
 					setDownloadRefId(refrenceId);
 					updateDownloadFrame();
 				} else {
@@ -400,7 +398,8 @@ public class DetailActivity extends Activity {
 			mViewPager.setCurrentItem(position);
 			mPlayerFrame.setVisibility(View.GONE);
 			
-			setFloatingActionButton(floatingButton);
+			ActivityHelper.createInstance(this).setFloatingActionButton(floatingButton, R.dimen.fab_button_size, 
+					R.dimen.fab_button_vertical_margin, R.dimen.fab_button_horizontal_margin);
 			setActionBarTitle(mPagerAdapter.getPageTitle(position));
 		} else {
 			floatingButton.setVisibility(View.GONE);
@@ -455,7 +454,7 @@ public class DetailActivity extends Activity {
 				performSettings();
 				break;
 			case R.id.action_about:
-				Utility.showAboutDialog(getContext());
+				AboutPreference.showAboutDialog(getContext());
 				break;
 			default:
 				break;
@@ -471,6 +470,7 @@ public class DetailActivity extends Activity {
 	
 	@Override
     public void onDestroy() {
+		
 		if (mMediaPlayer != null) {
 			mMediaPlayer.destroy();
 		}
@@ -479,33 +479,6 @@ public class DetailActivity extends Activity {
 		}
 		super.onDestroy();
     }
-	
-	@SuppressLint("RtlHardcoded")
-	protected void setFloatingActionButton(View view) {
-		if (view == null) return;
-		
-		if (view.getParent() != null) {
-			((ViewGroup)view.getParent()).removeView(view);
-		}
-		
-		ViewGroup decorView = (ViewGroup)getWindow().getDecorView();
-		ViewGroup contentView = (ViewGroup)decorView.findViewById(android.R.id.content);
-		
-		int size = (int)getResources().getDimension(R.dimen.fab_button_size);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
-		params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-		if (contentView == null)
-			params.bottomMargin = (int)getResources().getDimension(R.dimen.fab_button_vertical_margin) + SystemUiUtils.getNavigationBarHeight(this);
-		else 
-			params.bottomMargin = (int)getResources().getDimension(R.dimen.fab_button_vertical_margin);
-		params.rightMargin = (int)getResources().getDimension(R.dimen.fab_button_horizontal_margin);
-		view.setLayoutParams(params);
-		
-		if (contentView == null)
-			decorView.addView(view);
-		else
-			contentView.addView(view);
-	}
 	
 	private void performNinnawinSetDate() {
 		
@@ -599,7 +572,7 @@ public class DetailActivity extends Activity {
 	}
 	
 	protected void createPlayer(String fileName) {
-		File audioDir = Constants.getAudioFolder(getContext());
+		File audioDir = Common.getAudioFolder(getContext());
 		File audioFile = new File(audioDir, fileName);
 		mMediaPlayer.prepare(audioFile);
 	}

@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <dimen name="dialog_buttonbar_vertical_padding">2dp</dimen>
-    <dimen name="dialog_buttonbar_horizontal_padding">8dp</dimen>
-    <dimen name="dialog_horizontal_margin">16dp</dimen>
-    <dimen name="dialog_vertical_margin">8dp</dimen>
-    <dimen name="dialog_button_bar_height">48dip</dimen>
-    <dimen name="dialog_button_bar_divider_padding">1dip</dimen>
-    
     <style name="ButtonBar">
         <item name="android:background">@drawable/buttonbar_background_light</item>
         <item name="android:divider">@drawable/divider_horizontal_holo_dark</item>
@@ -28,9 +20,7 @@
 	    <item name="android:background">@drawable/transparent</item>
 	    <item name="android:layout_width">match_parent</item>
 	    <item name="android:layout_height">@dimen/dialog_button_bar_height</item>
-	    <item name="android:paddingTop">@dimen/dialog_buttonbar_vertical_padding</item>
-	    <item name="android:paddingLeft">@dimen/dialog_buttonbar_horizontal_padding</item>
-	    <item name="android:paddingRight">@dimen/dialog_buttonbar_horizontal_padding</item>
+	    <item name="android:paddingRight">@dimen/dialog_buttonbar_right_margin</item>
 	</style>
 	<style name="ButtonBar.Button.Material" parent="@android:style/Widget.Button">
         <item name="android:layout_marginTop">2dp</item>

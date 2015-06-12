@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <dimen name="dialog_button_bar_height">58dip</dimen>
-    
     <style name="ButtonBar.Material" parent="@style/ButtonBar">
         <item name="android:background">@drawable/transparent</item>
 	    <item name="android:layout_width">match_parent</item>
 	    <item name="android:layout_height">@dimen/dialog_button_bar_height</item>
-	    <item name="android:paddingRight">@dimen/dialog_buttonbar_horizontal_padding</item>
+	    <item name="android:paddingRight">@dimen/dialog_buttonbar_right_margin</item>
 	    <item name="android:paddingBottom">@dimen/dialog_vertical_margin</item>
     </style>
     <style name="ButtonBar.Button.Material" parent="@android:style/Widget.Material.Button.Borderless">
