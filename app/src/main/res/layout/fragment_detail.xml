@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:isScrollContainer="true"
+    android:orientation="vertical"
+    android:background="@drawable/app_background"
+    tools:context=".fragment.DetailFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/detail_content_horizontal_margin"
+            android:paddingLeft="@dimen/detail_content_horizontal_margin"
+            android:paddingEnd="@dimen/detail_content_horizontal_margin"
+            android:paddingRight="@dimen/detail_content_horizontal_margin"
+            android:paddingTop="@dimen/detail_content_vertical_margin"
+            android:paddingBottom="@dimen/detail_content_bottom_margin"
+            android:clipToPadding="false"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textDetailDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="@string/app_name"
+                android:textColor="@color/detail_text_color"
+                android:textSize="@dimen/detail_text_size_medium" />
+
+            <TextView
+                android:id="@+id/textDetailSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/detail_content_vertical_margin"
+                android:background="@drawable/detail_header_background"
+                android:ems="10"
+                android:text="@string/app_name"
+                android:textColor="@color/detail_subheader_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/detail_text_size_medium" />
+
+            <TextView
+                android:id="@+id/textDetailSubDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/detail_content_vertical_margin"
+                android:ems="10"
+                android:text="@string/app_name"
+                android:textColor="@color/detail_text_color"
+                android:textSize="@dimen/detail_text_size_medium" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

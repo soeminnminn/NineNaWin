@@ -1,0 +1,12 @@
+<resources>
+    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices (~960dp and ~1280dp respectively). -->
+
+    <dimen name="list_item_min_height">1.0in</dimen>
+
+    <dimen name="static_bottombar_height">1.6in</dimen>
+
+    <dimen name="player_seek_bottom_margin">1.5in</dimen>
+
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.s16.widget.SlidingUpTabDrawer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/playerTab"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:sudBackgroundColor="@color/appbar_background"
+    app:sudContent="@+id/tabContent"
+    app:sudHandle="@+id/tabHandle"
+    app:sudRightTab="true" >
+    
+    <RelativeLayout
+        android:id="@+id/tabHandle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/player_tab_margin_bottom"
+        android:paddingStart="@dimen/player_tab_horizontal_margin"
+        android:paddingLeft="@dimen/player_tab_horizontal_margin"
+        android:paddingEnd="@dimen/player_tab_horizontal_margin"
+        android:paddingRight="@dimen/player_tab_horizontal_margin"
+        android:paddingTop="@dimen/player_tab_margin_top"
+        android:background="@drawable/tab_bkg_right" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="@dimen/player_tab_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="@string/player_title" />
+        
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/tabContent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/static_bottombar_height"
+        android:background="@color/appbar_background"
+        android:orientation="vertical" >
+        
+        <include layout="@layout/layout_detail_player"
+	        android:id="@+id/detailPlayerFrame"
+	        android:layout_width="match_parent"
+	        android:layout_height="@dimen/static_bottombar_height" />
+        
+    </LinearLayout>
+    
+
+</com.s16.widget.SlidingUpTabDrawer>

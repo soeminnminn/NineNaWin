@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#ffb18427</color>
+    <color name="colorPrimaryDark">#ff966f21</color>
+    <color name="colorAccent">#ffe3a832</color>
+
+    <color name="app_background">@color/background_holo_light</color>
+
+    <color name="appbar_background">#ccb18427</color>
+    <color name="appbar_player_background">#ffb18427</color>
+
+    <color name="detail_text_color">@color/black</color>
+    <color name="detail_subheader_text_color">#ff8080c0</color>
+
+    <color name="scrubber_track_color">#ffc8de7a</color>
+    <color name="scrubber_primary_color">#ff80ac5d</color>
+    <color name="scrubber_secondary_color">#ff60ab22</color>
+    <color name="seek_thumb_color">#ff80ac5d</color>
+
+    <color name="ninenawin_red">#993333</color>
+    <color name="ninenawin_brown">#330000</color>
+    <color name="ninenawin_green">#61A161</color>
+    <color name="ninenawin_yellow">#CCCC33</color>
+    <color name="ninenawin_pink">#DB70DB</color>
+    <color name="ninenawin_white">@android:color/white</color>
+
+    <color name="player_button_normal">#fff683</color>
+</resources>

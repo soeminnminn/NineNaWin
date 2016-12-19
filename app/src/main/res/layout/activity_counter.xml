@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CounterActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/actionbar_background"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin" >
+
+        <LinearLayout
+            android:id="@+id/layoutCountCaption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:minHeight="@dimen/list_item_min_height"
+            android:background="@drawable/header_background_light"
+            android:gravity="center_vertical"
+            android:weightSum="2"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtRoundCaption"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/round_diplay_caption" />
+
+            <TextView
+                android:id="@+id/txtCountCaption"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/count_diplay_caption" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutCountValue"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/layoutCountCaption"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtRoundValue"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@color/black_50_opacity"
+                android:shadowDx="0.0"
+                android:shadowDy="1.0"
+                android:shadowRadius="5.0"
+                android:text="@string/round_diplay"
+                android:textSize="@dimen/count_text_size" />
+
+            <TextView
+                android:id="@+id/txtCountValue"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@color/black_50_opacity"
+                android:shadowDx="0.0"
+                android:shadowDy="1.0"
+                android:shadowRadius="5.0"
+                android:text="@string/count_diplay"
+                android:textSize="@dimen/count_text_size" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtCountButton"
+            android:layout_width="170dip"
+            android:layout_height="170dip"
+            android:layout_centerInParent="true"
+            android:background="@drawable/fab_button_background" />
+
+        <com.s16.widget.SlidingTab
+            android:id="@+id/slideSetReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

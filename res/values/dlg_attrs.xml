@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="dialog_buttonbar_right_margin">8dp</dimen>
-    <dimen name="dialog_horizontal_margin">16dp</dimen>
-    <dimen name="dialog_vertical_margin">8dp</dimen>
-    <dimen name="dialog_button_bar_height">48dip</dimen>
-    <dimen name="dialog_button_bar_divider_padding">1dip</dimen>
-</resources>
