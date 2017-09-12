@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -123,7 +124,7 @@ public class AudioPlayerUi extends ContextWrapper {
         mButtonPlay = (ImageButton)mPlayerFrame.findViewById(R.id.imageButtonPlayer);
         mSeekPlayer = (SeekBar)mPlayerFrame.findViewById(R.id.seekBarPlayer);
 
-        mMediaPlayer = new MediaPlayerImpl(mSeekPlayer, mTxtPlayerStart, mTxtPlayerEnd);
+        mMediaPlayer = new MediaPlayerImpl(getContext(), mSeekPlayer, mTxtPlayerStart, mTxtPlayerEnd);
         mMediaPlayer.setMediaPlayerEventListener(new MediaPlayerImpl.MediaPlayerEventListener() {
 
             @Override
@@ -245,5 +246,9 @@ public class AudioPlayerUi extends ContextWrapper {
         File audioDir = Common.getAudioFolder(getContext());
         File audioFile = new File(audioDir, fileName);
         mMediaPlayer.prepare(audioFile);
+        /*Uri.Builder uriBuilder = Uri.parse("http://192.168.0.168/file/stream").buildUpon();
+        uriBuilder.appendQueryParameter("file", "./uploads/song-mp3/CharTate-Jorny.mp3");
+        Log.i("AUDIO", "uri=" + uriBuilder.build().toString());
+        mMediaPlayer.prepare(uriBuilder.build());*/
     }
 }
