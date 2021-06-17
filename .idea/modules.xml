@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DhammaNotes.iml" filepath="$PROJECT_DIR$/DhammaNotes.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/datetimepicker/datetimepicker.iml" filepath="$PROJECT_DIR$/datetimepicker/datetimepicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/transitions/transitions.iml" filepath="$PROJECT_DIR$/transitions/transitions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dhamma_app.iml" filepath="$PROJECT_DIR$/dhamma_app.iml" />
     </modules>
   </component>
 </project>
